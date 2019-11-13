@@ -1,6 +1,14 @@
 import firebase from 'firebase'
-import Vue from 'vue/dist/vue.esm.js';
+// import Vue from 'vue/dist/vue.esm.js';
+import Vue from 'vue'
 import App from './App'
+
+import router from './router'
+
+
+
+
+
 
 Vue.config.productionTip = false
 
@@ -18,8 +26,11 @@ var firebaseConfig = {
  firebase.initializeApp(firebaseConfig);
 
 /* eslint-disable no-new */
+/* eslint-disable no-new */
+
 new Vue({
   el: '#app',
-  components: { App },
+  router: router,
+  components: { App }, //ここ
   template: '<App/>'
 })
