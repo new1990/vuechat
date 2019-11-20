@@ -1,33 +1,25 @@
 <template>
   <div class="toplist">
-    <header class="header">
-      <h1>Chat</h1>
 
-      <!-- <div v-if="user.uid" key="login">
-        [{{ user.displayName }}]
-        <button type="button" @click="doLogout">ログアウト</button>
+
+
+      <div class ="topic" v-for="(value, key) in list" :key="key">
+        <router-link :to="{name:'content',params:{id:key}}" >
+        {{value.title}}
+        </router-link>
       </div>
 
-      <div v-else key="logout">
-        <button type="button" @click="doLogin">ログイン</button>
-      </div> -->
-    </header>
-    <!-- <button v-on:click="listen"></button> -->
-aa:{{col_list}}
-    <ul>
-      <li v-for="(value, key) in list" :key="key"><button> {{key}}</button></li>
-    </ul>
-    <transition-group name="chat" tag="div" class="list content">
+    <!-- <transition-group name="chat" tag="div" class="list content">
       <section v-for="{ key, name, image, message } in chat" :key="key" class="item">
         <div class="item-image"><img :src="image" width="40" height="40"></div>
         <div class="item-detail">
-          <div class="item-name">{{ name }}</div>
+          <div class="btn-flat-border">{{ name }}</div>
           <div class="item-message">
             <nl2br tag="div" :text="message"/>
           </div>
         </div>
       </section>
-    </transition-group>
+    </transition-group> -->
 
     <form action="" @submit.prevent="doSend" class="form">
       <textarea
@@ -43,10 +35,10 @@ aa:{{col_list}}
 // firebase モジュール
 import firebase from 'firebase'
 // 改行を <br> タグに変換するモジュール
-import Nl2br from 'vue-nl2br'
+// import Nl2br from 'vue-nl2br'
 export default {
   name: 'TopList',
-  components: { Nl2br },
+  // components: { Nl2br },
   data() {
     return {
       user: {},  // ユーザー情報
@@ -112,24 +104,15 @@ export default {
         window.scrollTo(0, document.body.clientHeight)
       })
     },
-    // 受け取ったメッセージをchatに追加
-    // データベースに新しい要素が追加されると随時呼び出される
-    childAdded(snap) {
-      const message = snap.val()
-      this.chat.push({
-        key: snap.key,
-        name: message.name,
-        image: message.image,
-        message: message.message
-      })
-      this.scrollBottom()
-    },
+
     doSend() {
       if ( this.input.length) {
         // firebase にメッセージを追加
-        firebase.database().ref("chat/room2").push({
-          title:"内容",
-          room_conte:{message: this.input,}
+        // childでテーブル名を指定
+        firebase.database().ref("chat").push({
+          title: this.input,
+
+
 
 
 
@@ -138,11 +121,32 @@ export default {
         })
       }
     }
+    // 受け取ったメッセージをchatに追加
+    // データベースに新しい要素が追加されると随時呼び出される
+
+
   }
 }
 </script>
 <style>
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+}
 
-/* @import "@/css/styles.css"; */
+.btn-flat-border:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+.topic{
+  padding-top:10px;
+}
+/* @import css/styles.css"; */
 
 </style>

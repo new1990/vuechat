@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <!-- <HeaderItem/> -->
+    <HeaderItem/>
 
-    <router-view/>
+    <div class ="main">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 // import HeaderItem from './components/HeaderItem'
-// import HeaderItem from './components/HeaderItem'
+import HeaderItem from './components/HeaderItem'
 export default {
   name: 'App',
- //  components : {
- //   HeaderItem
- // },
+  components : {
+   HeaderItem
+ },
 
 }
 </script>
@@ -34,6 +36,10 @@ html{
   margin-top: 60px;
 
 
+}
+
+.main{
+  padding-top: 50px;
 }
 
 
