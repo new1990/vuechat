@@ -7,7 +7,9 @@
         <ul class="CommonList mt10 fc">
           <li class ="topic" v-for="(value, key) in list" :key="key">
             <router-link :to="{name:'content',params:{id:key}}" >
+
             {{value.title}}
+
             </router-link>
           </li>
         </ul>
@@ -115,6 +117,12 @@ export default {
       })
     },
 
+    childAdded(snap) {
+      const message = snap.val()
+      console.log(message);
+
+    },
+
     doSend() {
       if ( this.input.length) {
         // firebase にメッセージを追加
@@ -122,13 +130,10 @@ export default {
         firebase.database().ref("chat").push({
           title: this.input,
 
-
-
-
-
-        }, () => {
+        },() => {
+          
           this.input = '' // フォームを空にする
-        })
+        } )
       }
     }
     // 受け取ったメッセージをchatに追加
@@ -160,6 +165,7 @@ export default {
 
 ul.CommonList li {
     position: relative;
+    margin-top:20px;
     padding: 18px 13px 19px;
     margin-bottom: 10px;
     -moz-border-radius: 2px;

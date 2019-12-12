@@ -1,11 +1,20 @@
 <template>
   <div class="toplist">
-  
+
     <!-- <button v-on:click="listen"></button> -->
 
+    <top-content
+      v-bind:key="list.id"
+      v-bind:title="list.title"
+      v-bind:body="list.body"
+      ></top-content>
 
-    <ul>
-      <li v-for="(value, key) in list" :key="key">{{value.message}}</li>
+    <ul class="CommonList mt10 fc">
+      <li class ="topic" v-for="(value, key) in list" :key="key">
+
+        {{value.message}}
+
+      </li>
     </ul>
     <transition-group name="chat" tag="div" class="list content">
       <section v-for="{ key, name, image, message } in chat" :key="key" class="item">
@@ -32,11 +41,16 @@
 <script>
 // firebase モジュール
 import firebase from 'firebase'
+import TopContent from "@/components/TopContent.vue";
 // 改行を <br> タグに変換するモジュール
 import Nl2br from 'vue-nl2br'
 export default {
   name: 'TopList',
-  components: { Nl2br },
+  components: {
+    Nl2br,
+    TopContent,
+
+   },
   data() {
     return {
       user: {},  // ユーザー情報
@@ -62,10 +76,7 @@ export default {
   // firebase.database().ref("message").child("message").child("-LtL5SQNB3xygcsbumXF").child("room1").on('value', function(snapshots) {
   // vue.col_list = snapshots.val();
   // });
-
-
   firebase.database().ref('chat/'+this.$route.params['id']).on('value', function(snapshot) {
-
    vue.list = snapshot.val();
    });
  },
