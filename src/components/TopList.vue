@@ -1,13 +1,23 @@
 <template>
   <div class="toplist">
 
+  <div id="hdm_MainMenu_box1" class="Contents">
 
-
-      <div class ="topic" v-for="(value, key) in list" :key="key">
-        <router-link :to="{name:'content',params:{id:key}}" >
-        {{value.title}}
-        </router-link>
+    <div class="Main_Column">
+        <ul class="CommonList mt10 fc">
+          <li class ="topic" v-for="(value, key) in list" :key="key">
+            <router-link :to="{name:'content',params:{id:key}}" >
+            {{value.title}}
+            </router-link>
+          </li>
+        </ul>
+    </div>
+    <div class="Side_Column">
+      <div class="ContentsTitle">
+      掲示板を探す・作る
       </div>
+    </div>
+  </div>
 
     <!-- <transition-group name="chat" tag="div" class="list content">
       <section v-for="{ key, name, image, message } in chat" :key="key" class="item">
@@ -147,6 +157,51 @@ export default {
 .topic{
   padding-top:10px;
 }
+
+ul.CommonList li {
+    position: relative;
+    padding: 18px 13px 19px;
+    margin-bottom: 10px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -o-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0px 1px 1px 0px #a5a9ab;
+    -moz-box-shadow: 0px 1px 1px 0px #a5a9ab;
+    -webkit-box-shadow: 0px 1px 1px 0px #a5a9ab;
+}
 /* @import css/styles.css"; */
+
+.Contents {
+    position: ralative;
+    width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.Main_Column {
+    float: left;
+    width: 620px;
+    margin: 0 20px 0 0;
+}
+
+.Side_Column {
+    margin-top: 10px;
+    float: right;
+    width: 320px;
+}
+.ContentsTitle {
+    position: relative;
+    display: block;
+    padding: 0 22px;
+    font-size: 100%;
+    font-weight: bold;
+    color: #fff;
+    background: #00b0f0;
+    height: 45px;
+    line-height: 45px;
+}
 
 </style>

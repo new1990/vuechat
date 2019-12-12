@@ -3,11 +3,11 @@
   box-sizing: border-box;
 }
 .header {
-  background: #3ab383;
-  margin-bottom: 1em;
-  padding: 0.4em 0.8em;
-  color: #fff;
+  border-bottom: 1px solid #e8e8e8;
+    padding: 10px 0;
+    background: #fff;
 }
+
 .content {
   margin: 0 auto;
   padding: 0 10px;

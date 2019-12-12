@@ -1,35 +1,6 @@
 <template>
-  <header id="header">
-    <nav id="header-nav">
-      <div class="roof-nav-contents">
-        <div class="ferret-logo-area">
-
-
-        </div>
-        <div class="text-links">
-          <div class="text-link-wrapper">
-            <router-link to="/">投票BOX</router-link>
-
-          </div>
-        </div>
-        <div class="icon-links">
-          <div class="serch-wrapper">
-            <form method="get" action="#" class="search_container">
-              <input type="text" size="25" placeholder="キーワード検索">
-              <input type="submit" value="検索">
-              <!-- <input type="submit" value="&#xf002"> -->
-            </form>
-          </div>
-
-          <div class="icon-link-wrapper">
-
-            <router-link to="/new"><span class="cp_btn">投稿する</span></router-link>
-            <!-- <a href="/drafts/new" class="st-Header_postButton px-2 mr-2"></a> -->
-          </div>
-        </div>
-      </div>
-    </nav>
-
+  <header class="header">
+   あああs
 
   </header>
 </template>
@@ -108,37 +79,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.search_container{
-  box-sizing: border-box;
-  position: relative;
-  border: 1px solid #999;
-  display: block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  height: 2.3em;
-  width: 265px;
-  overflow: hidden;
-}
-.search_container input[type="text"]{
-  border: none;
-  height: 2.0em;
-}
-.search_container input[type="text"]:focus {
-  outline: 0;
-}
-.search_container input[type="submit"]{
-  cursor: pointer;
-  font-family: FontAwesome;
-  border: none;
-  background: #3879D9;
-  color: #fff;
-  position: absolute;
-  width: 3.5em;
-  height: 3.0em;
-  right:0px;
-  top: -3px;
-  outline : none;
-}
 
 span.cp_btn {
 	position: relative;

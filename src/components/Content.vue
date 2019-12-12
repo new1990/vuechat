@@ -1,17 +1,6 @@
 <template>
   <div class="toplist">
-    <header class="header">
-      <h1>Chat</h1>
-
-      <!-- <div v-if="user.uid" key="login">
-        [{{ user.displayName }}]
-        <button type="button" @click="doLogout">ログアウト</button>
-      </div>
-
-      <div v-else key="logout">
-        <button type="button" @click="doLogin">ログイン</button>
-      </div> -->
-    </header>
+  
     <!-- <button v-on:click="listen"></button> -->
 
 
