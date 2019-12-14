@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TopList from '@/components/TopList' //コンポーネントを読み込む
 import Content from '@/components/Content' //コンポーネントを読み込む
+import NewRoom from '@/components/NewRoom' //コンポーネントを読み込む
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ export default new VueRouter({
     { path: '/content/:id',
       name: 'content',
       component: Content },
+    {
+      path: '/new',
+      name: 'newroom',
+      component: NewRoom
+    },
 
   ]
 })
