@@ -31,6 +31,7 @@ var firebaseConfig = {
 new Vue({
   el: '#app',
   router: router,
+  
   components: { App }, //ここ
   template: '<App/>'
 })

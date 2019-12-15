@@ -95,6 +95,7 @@ text-decoration: none;
     height: 21px;
     font-size: 69%;
     color: #ababab;
+    float: right;
 }
 
 .Find_Contents {

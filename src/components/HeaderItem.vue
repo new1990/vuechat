@@ -1,125 +1,134 @@
 <template>
   <header class="header">
-   あああs
+<div class="head_wrapper">
+    <ul class="menu">
+      <li>
+     <router-link to="/">みんなでチャット</router-link>
+     </li>
+     <li>
+    カテゴリー
+
+    </li>
+   </ul>
+
+   <ul class="admmin">
+    <li class ="in" v-if="client != null && token != null && uid !=null">
+      <img class="top_img" v-bind:src=image />
+      {{name}}
+
+      <button class="btn-flat-dashed-filled" v-on:click="logout">ログアウト</button>
+
+    </li>
+    <li class ="out" v-else>
+      <router-link to="/login">ログイン</router-link>
+
+
+    </li>
+    </ul>
+ </div>
 
   </header>
 </template>
 
+<script>
+
+export default {
+name: 'HeaderItem',
+components: {
+
+  },
+
+ data: function(){ // データを返す関数にする
+        return {
+          name:'',
+          image:'',
+          token:'',
+          client:'',
+          uid:'',
+
+        }
+
+    },
+
+    created :function(){
+    this.name = localStorage.getItem('name');
+    this.image = localStorage.getItem('image');
+    this.client = localStorage.getItem('client');
+    this.uid = localStorage.getItem('uid');
+    this.token = localStorage.getItem('access-token');
+
+
+  },
+ methods: {
+  logout: function () {
+     localStorage.removeItem('name');
+     localStorage.removeItem('image');
+     localStorage.removeItem('client');
+     localStorage.removeItem('uid');
+     localStorage.removeItem('access-token');
+     this.something();
+
+   }
+ },
+ reload() {
+   this.$router.go({path: this.$router.currentRoute.path, force: true});
+   },
+   something() {
+       // reloadを呼び出すことで画面リロード
+       this.reload();
+   },
+
+
+}
+</script>
+
 <!-- style中身は省略 -->
 <style scoped>
-
-
-#header-nav{
-  position: fixed;
-    top: 0;
-    width: 100%;
-    height: 80px;
-    z-index: 2;
-
+.header{
+  height: 70px;
+  align-items: center;
 }
 
-.roof-nav-contents{
-  display: flex;
-    width: 100%;
-    height: 100%;
+.head_wrapper{
+    position: relative;
     margin: 0 auto;
-    border-bottom: 1px solid #eee;
-    background: #fff;
-
-    box-shadow: 0 0 3px #23afee;
-}
-
-.roof-nav-contents .icon-links {
-    display: flex;
-    margin-left: auto;
+    padding: 0 50px;
 
 }
 
-.roof-nav-contents .icon-links .icon-link-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100%;
-    width: 75px;
-    margin-right:30px;
-}
 
-.serch-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100%;
-    width: 250px;
-    margin:0 20px;
-}
 
-.st-Header_postButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    background-color: #3f9200;
-    color: #fff;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.fa {
+.menu li {
     display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    margin-right: 18px;
+}
+
+ul{
+  display: inline-block;
+}
+
+.menu{
+float: left;
+margin-top:10px;
+}
+
+.admmin{
+float: right;
+
+}
+
+.in{
+
+}
+.out{
+  margin-top:10px;
 }
 
 
-span.cp_btn {
-	position: relative;
-	display: block;
-	width: 80px;
-	padding:6px 10px;
-	text-align: center;
+.top_img{
+  width:50px;
+  height:50px;
 
-	text-decoration: none;
-	color: #FFF;
-	text-shadow: 0 0 5px rgba(255, 255, 255, 0.0);
-	background: #999;
-	transition: .4s;
-	border-radius: 4px;
-}
-span.cp_btn:hover {
-	text-shadow: -6px 0px 15px rgba(255, 255, 240, 0.83), 6px 0px 15px rgba(255, 255, 240, 0.83);
-	transition: .4s;
-}
-
-
-
-.text-links {
-    display: flex;
-}
-
-.text-link-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    padding: 15px 10px;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-.ferret-logo-area {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    margin: 0 30px;
 }
 
 </style>

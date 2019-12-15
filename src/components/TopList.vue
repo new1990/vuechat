@@ -25,15 +25,35 @@
               {{value.body}}
             </div>
             <div class="ListInfo fc">
+              <span>
               {{value.ctegories_name}}
-
-              {{ value.created_at | dateFormatter }}
+              </span>
+              <span>
+              {{ value.created_at | moment }}
+              </span>
             </div>
 
 
             </router-link>
           </li>
         </ul>
+
+        <template>
+          <div class="pager">
+    <paginate
+      v-model="page"
+      :page-count="10"
+      :page-range="3"
+      :margin-pages="2"
+      :click-handler="clickCallback"
+      :prev-text="'Prev'"
+      :next-text="'Next'"
+      :container-class="'pagination'"
+      :page-class="'page-item'">
+    </paginate>
+
+  </div>
+      </template>
     </div>
     <div class="Side_Column">
       <div class="ContentsTitle">
@@ -49,6 +69,9 @@
           </li>
         </ul>
       </div>
+
+
+
     </div>
   </div>
 
@@ -71,27 +94,38 @@
 // firebase モジュール
 import firebase from 'firebase'
 import axios from 'axios'
-import format from 'date-fns/format'
+import moment from 'moment';
+import Paginate from 'vuejs-paginate'
+
+const api = 'http://localhost:3000/rooms'
+
+
 // 改行を <br> タグに変換するモジュール
 // import Nl2br from 'vue-nl2br'
 export default {
   name: 'TopList',
   // components: { Nl2br },
+  components: {
+    Paginate,
+
+  },
   data() {
     return {
       user: {},  // ユーザー情報
       chat: [],  // 取得したメッセージを入れる配列
       input: '' , // 入力したメッセージ
       list: [], // 最新状態はここにコピーされる
-      col_list: []
+      col_list: [],
+      page: 1,
+
     }
   },
 
   filters: {
-    dateFormatter: function (date) {
-      return format(date, 'YYYY/MM/DD')
-    }
-  },
+        moment: function (date) {
+            return moment(date).format('YYYY/MM/DD');
+        }
+    },
 
 
   mounted () {
@@ -130,6 +164,33 @@ export default {
       const provider = new firebase.auth.TwitterAuthProvider()
       firebase.auth().signInWithPopup(provider)
     },
+
+    clickCallback(pageNum) {
+      this.page = pageNum; // pageNumはpagerの何番目をclickしたかを取得
+      axios.get(api, {
+        params: {
+          page: this.page,
+        },
+      }).then(({ data }) => {
+        let vm = this
+        vm.list = data
+        // if (data.length) {
+        //   let vm = this
+        //   vm.list = data
+        // } else {
+        //   console.log(1);
+        // }
+      })
+      // axios.get(api, {
+      //   params: {
+      //     page: this.page,
+      //   },
+      // }).then(({ response }) =>{(vm.list = response.data)}
+
+
+    },
+
+
     // ログアウト処理
     doLogout() {
       firebase.auth().signOut()
@@ -252,6 +313,81 @@ ul.CommonList li {
     background: #00b0f0;
     height: 45px;
     line-height: 45px;
+}
+
+.pager  ul.pagination {
+  text-align: center;
+  margin: 30px 0;
+  padding: 0;
+}
+
+.pager .pagination li {
+  display: inline;
+  margin: 0 2px;
+  padding: 0;
+  display: inline-block;
+  background:white;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  position: relative;
+
+}
+
+.pager .pagination li a{
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display:table;
+  color: black;
+  text-decoration: none;
+  border: solid 0.1px #000000;
+  padding-top: 5px;
+
+}
+
+.pager .pagination li a span{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.pager .pagination li a:hover,
+.pager .pagination li a.active{
+  color: #000;
+  background: #ccf;
+}
+
+@media only screen and (max-width: 767px){
+  .pager .pagination li{
+    display: none;
+  }
+
+  .pager .pagination li.pre,
+  .pager .pagination li.next{
+    display: inline-block;
+    width: 40%;
+    height: 50px;
+    text-align: center;
+  }
+
+  .pager .pagination li.pre a,
+  .pager .pagination li.next a{
+    width: 100%;
+    text-align: center;
+  }
+
+  .pager .pagination li.pre span::after{
+    content: "前の10件へ";
+  }
+
+  .pager .pagination li.next span::before{
+    content: "次の10件へ";
+  }
+
 }
 
 </style>
