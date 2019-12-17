@@ -16,7 +16,7 @@
 
 
         <ul class="CommonList mt10 fc">
-          <li class ="topic" v-for="(value, key) in list" :key="key">
+          <li class ="abc" v-for="(value, key) in list" :key="key">
             <router-link :to="{name:'content',params:{id:key}}" >
             <h1 class="ListTitle">
             {{value.name}}
@@ -52,7 +52,7 @@
       :page-class="'page-item'">
     </paginate>
 
-  </div>
+    </div>
       </template>
     </div>
     <div class="Side_Column">
@@ -60,13 +60,23 @@
       掲示板を探す・作る
       </div>
 
-      <div class="Find_Contents ThreadMenu">
-        <ul class="CommonMenuList mt10 fc">
-          <li>
+      <div class="side_menu">
+        <ul class="side_item_ul">
+          <li class="side_item_list">
             <router-link  to="/new">
               <div class="Name"><span class="Icon Icon_Pencil03"></span>作る</div>
             </router-link>
           </li>
+
+          <li class="side_item_list changeh">
+
+              <div class="Name"><span class="Icon Icon_Pencil03"></span>探す</div>
+              <div class="Name"><input placeholder="打ち直しパス" >
+                <button class="btn-flat-dashed-filled" >検索</button>
+              </div>
+
+          </li>
+
         </ul>
       </div>
 
@@ -264,8 +274,11 @@ export default {
   color: white;
 }
 
-.topic{
+.abc{
   padding-top:10px;
+  margin-left:50px;
+  margin-right:50px;
+   overflow: hidden;
 }
 
 ul.CommonList li {
@@ -310,7 +323,7 @@ ul.CommonList li {
     font-size: 100%;
     font-weight: bold;
     color: #fff;
-    background: #00b0f0;
+    background: #e3b04b;
     height: 45px;
     line-height: 45px;
 }

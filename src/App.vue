@@ -1,11 +1,15 @@
 <template>
   <div id="app">
+    <div class="top_line">
+    </div>
     <HeaderItem/>
 
     <div class ="main">
       <router-view/>
     </div>
+
   </div>
+
 </template>
 
 <script>
@@ -137,5 +141,50 @@ text-decoration: none;
     -o-text-overflow: ellipsis;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+.top_img{
+  width:50px;
+  height:50px;
+
+}
+
+.pos_left{
+  float:left;
+}
+
+
+
+.side_menu{
+  margin-top: 30px;
+}
+
+.side_item_ul{
+
+}
+
+.side_item_list{
+  background-color: white;
+  margin-top: 10px;
+  height: 30px;
+
+}
+
+.left_chat{
+  width:30%;
+
+}
+
+.right_chat{
+  width:70%;
+}
+
+.changeh{
+  height: 70px;
+}
+
+.top_line{
+  height: 10px;
+  background-color:#f1d6ab;
 }
 </style>

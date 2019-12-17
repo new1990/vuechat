@@ -21,7 +21,7 @@
   bottom: 0;
   height: 80px;
   width: 100%;
-  background: #f5f5f5;
+  background: #f1d6ab;
 }
 .form textarea {
   border: 1px solid #ccc;
@@ -81,4 +81,20 @@
 ul {
   list-style: none;
   padding-inline-start:0px;
+}
+
+.topic{
+  overflow: hidden;
+
+  padding-top:10px;
+  margin-right:50px;
+  margin-left:50px;
+
+
+}
+
+.sub{
+  margin-right:50px;
+  margin-right:50px;
+  padding-right:50px;
 }

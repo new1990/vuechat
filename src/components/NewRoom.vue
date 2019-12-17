@@ -113,14 +113,11 @@ export default {
   color: white;
 }
 
-.topic{
-  padding-top:10px;
-}
 
 ul.CommonList li {
     position: relative;
     margin-top:20px;
-    padding: 18px 13px 19px;
+    padding: 5px 5px 5px;
     margin-bottom: 10px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -159,7 +156,7 @@ ul.CommonList li {
     font-size: 100%;
     font-weight: bold;
     color: #fff;
-    background: #00b0f0;
+    background: #e3b04b;
     height: 45px;
     line-height: 45px;
 }

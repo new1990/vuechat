@@ -1,6 +1,8 @@
 <template>
-  <header class="header">
+
+<header class="header">
 <div class="head_wrapper">
+
     <ul class="menu">
       <li>
      <router-link to="/">みんなでチャット</router-link>
@@ -21,6 +23,7 @@
     </li>
     <li class ="out" v-else>
       <router-link to="/login">ログイン</router-link>
+      <router-link to="/new_account">アカウント作成</router-link>
 
 
     </li>
@@ -68,15 +71,16 @@ components: {
      localStorage.removeItem('access-token');
      this.something();
 
-   }
+   },
+   reload() {
+     this.$router.go({path: this.$router.currentRoute.path, force: true});
+     },
+     something() {
+         // reloadを呼び出すことで画面リロード
+         this.reload();
+     },
+
  },
- reload() {
-   this.$router.go({path: this.$router.currentRoute.path, force: true});
-   },
-   something() {
-       // reloadを呼び出すことで画面リロード
-       this.reload();
-   },
 
 
 }
@@ -87,6 +91,8 @@ components: {
 .header{
   height: 70px;
   align-items: center;
+
+
 }
 
 .head_wrapper{
@@ -125,10 +131,6 @@ float: right;
 }
 
 
-.top_img{
-  width:50px;
-  height:50px;
 
-}
 
 </style>

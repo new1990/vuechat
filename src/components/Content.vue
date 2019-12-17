@@ -10,12 +10,26 @@
       ></top-content>
 
     <ul class="CommonList mt10 fc">
-      <li class ="topic" v-for="(value, key) in list" :key="key">
+      <li class ="topic sub" v-for="(value, key) in list" :key="key">
+        <div class= "left_chat">
+          <img class="top_img pos_left" v-bind:src=value.image />
 
+          <div class="pos_left">{{value.name}}</div>
+
+        </div>
+        <div class= "right_chat">
         {{value.message}}
+        </div>
+
+
+
+
+
 
       </li>
+
     </ul>
+
     <transition-group name="chat" tag="div" class="list content">
       <section v-for="{ key, name, image, message } in chat" :key="key" class="item">
         <div class="item-image"><img :src="image" width="40" height="40"></div>
@@ -28,7 +42,8 @@
       </section>
     </transition-group>
 
-    <form action="" @submit.prevent="doSend" class="form">
+
+    <form id ="end" action="" @submit.prevent="doSend" class="form">
       <textarea
         v-model="input"
 
@@ -57,7 +72,9 @@ export default {
       chat: [],  // 取得したメッセージを入れる配列
       input: '' , // 入力したメッセージ
       list: [], // 最新状態はここにコピーされる
-      col_list: []
+      col_list: [],
+      name:'',
+      image:'',
     }
   },
 
@@ -71,25 +88,40 @@ export default {
   //   // })
   // },
   created: function(){
- var vue = this;
+
+
+   this.name = localStorage.getItem('name');
+   this.image = localStorage.getItem('image');
+   this.client = localStorage.getItem('client');
+   this.uid = localStorage.getItem('uid');
+   this.token = localStorage.getItem('access-token');
+
+
+   var vue = this;
 
   // firebase.database().ref("message").child("message").child("-LtL5SQNB3xygcsbumXF").child("room1").on('value', function(snapshots) {
   // vue.col_list = snapshots.val();
   // });
   firebase.database().ref('chat/'+this.$route.params['id']).on('value', function(snapshot) {
    vue.list = snapshot.val();
+
+
    });
+
+   if(this.client != null && this.token != null && this.uid !=null){
+
+    return false;
+
+   }else{
+     this.name ='ゲストさん';
+     this.image= 'https://pbs.twimg.com/profile_images/2729946515/bef7a4f9a35d7f36deaf63db9ac0dde8_400x400.png';
+   }
  },
+
+
   methods: {
-    // ログイン処理
-    doLogin() {
-      const provider = new firebase.auth.TwitterAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-    },
-    // ログアウト処理
-    doLogout() {
-      firebase.auth().signOut()
-    },
+
+
     // listen () {
     //   firebase.database().ref('message').on('value', snapshot => {
     //     console.log(snapshot.val());
@@ -107,12 +139,14 @@ export default {
     //   })
     // },
 
-    // スクロール位置を一番下に移動
-    scrollBottom() {
+    scrollToEnd() {
       this.$nextTick(() => {
-        window.scrollTo(0, document.body.clientHeight)
-      })
-    },
+        var container = this.$el.querySelector("#end");
+
+            console.log(container.scrollHeight);
+             })
+
+      },
     // 受け取ったメッセージをchatに追加
     // データベースに新しい要素が追加されると随時呼び出される
     childAdded(snap) {
@@ -123,18 +157,25 @@ export default {
         image: message.image,
         message: message.message
       })
-      this.scrollBottom()
+      this.scrollBottom();
+
     },
     doSend() {
       if ( this.input.length) {
         // firebase にメッセージを追加
         firebase.database().ref("chat/"+this.$route.params['id']).push({
-          message: this.input
+
+
+          message: this.input,
+          name:this.name,
+          image:this.image,
+
 
 
 
         }, () => {
-          this.input = '' // フォームを空にする
+          this.input = ''; // フォームを空にする
+          this.scrollToEnd();
         })
       }
     }

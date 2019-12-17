@@ -1,20 +1,20 @@
 <template>
   <div class="aa">
     <div class="aa">
-
+      <input placeholder="名前" v-model="name"><br>
       <input placeholder="メール" v-model="email"><br>
       <input placeholder="パス" type="password" v-model="l_pass"><br>
-      <input placeholder="打ち直しパス" type="password" v-model="l_v2_pass"><br>
-      <button class="btn-flat-dashed-filled" v-on:click="login">作成</button>
+
+      <button class="btn-flat-dashed-filled" v-on:click="newcreate">作成</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-const api = 'http://localhost:3000/api/v1/auth/sign_in'
+const api = 'http://localhost:3000/api/v1/auth'
 export default {
-name: 'Login',
+name: 'NewAccount',
 components: {
 
   },
@@ -23,15 +23,15 @@ components: {
         return {
           email:'',
           l_pass:'',
-          l_v2_pass:'',
+          name:'',
 
         }
 
     },
 
     methods : {
-      login: function(){
-        axios.post(api, { email: this.email,password:this.l_pass , password_confirmation: this.l_v2_pass}).then((response) => {
+      newcreate: function(){
+        axios.post(api, { email: this.email,password:this.l_pass , name: this.name}).then((response) => {
 
           if (response.status == 200){
 

@@ -1,13 +1,13 @@
 <template>
-  <div class="ThreadHeader">
-    <div class="top_content">
+
+    <div class="ThreadHeader top_content">
 
       <h1 itemprop="headline">{{title}}</h1>
       <div class="ThreadDetailTxt fc">
       {{body}}
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -28,5 +28,11 @@ components: {
 </script>
 
 <style scoped>
+
+.top_content{
+    background-color: white;
+    margin:0 auto;
+    width: 500px;
+  }
 
 </style>

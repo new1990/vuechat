@@ -4,6 +4,7 @@ import TopList from '@/components/TopList' //コンポーネントを読み込�
 import Content from '@/components/Content' //コンポーネントを読み込む
 import NewRoom from '@/components/NewRoom' //コンポーネントを読み込む
 import Login from '@/components/Login' //コンポーネントを読み込む
+import NewAccount from '@/components/NewAccount' //コンポーネントを読み込む
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/new_account',
+      name: 'new_account',
+      component: NewAccount
     },
 
   ]
